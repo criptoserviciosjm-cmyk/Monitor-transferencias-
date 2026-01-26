@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b2b26" />
+  <title>INV J.B</title>
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/icon-192.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand__logo" src="/assets/icon-192.png" alt="J.B" />
+        <div class="brand__text">
+          <div class="brand__title" id="appTitle">Inversiónes J.B</div>
+          <div class="brand__sub">Monitor de tasas (solo lectura)</div>
+        </div>
+      </div>
+      <div class="topbar__actions">
+        <button class="btn btn--ghost" id="refreshBtn" type="button">Actualizar</button>
+        <button class="btn btn--ghost btn--icon" id="adminBtn" type="button" aria-label="Editar tasas" title="Editar tasas">
+          ✎
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="cards">
+        <article class="card">
+          <div class="card__meta">
+            <div class="pill pill--flag" title="Estados Unidos">🇺🇸</div>
+            <div class="pill pill--label">USD-BCV</div>
+            <div class="pill pill--flag" title="Venezuela">🇻🇪</div>
+          </div>
+          <div class="card__value" id="usdBcv">—</div>
+          <div class="card__hint">USD ↔ VES (BCV)</div>
+        </article>
+
+        <article class="card">
+          <div class="card__meta">
+            <div class="pill pill--flag" title="Brasil">🇧🇷</div>
+            <div class="pill pill--label">Brasil → Venezuela</div>
+            <div class="pill pill--flag" title="Venezuela">🇻🇪</div>
+          </div>
+          <div class="card__value" id="brlVes">—</div>
+          <div class="card__hint">BRL → VES</div>
+        </article>
+
+        <article class="card">
+          <div class="card__meta">
+            <div class="pill pill--flag" title="Venezuela">🇻🇪</div>
+            <div class="pill pill--label">Venezuela → Brasil</div>
+            <div class="pill pill--flag" title="Brasil">🇧🇷</div>
+          </div>
+          <div class="card__value" id="vesBrl">—</div>
+          <div class="card__hint">VES → BRL</div>
+        </article>
+      </section>
+
+      <section class="notice">
+        <div class="notice__row">
+          <div class="badge">
+            <span class="dot"></span>
+            <span>Solo lectura</span>
+          </div>
+          <div class="updated">
+            <div class="updated__label">Última actualización</div>
+            <div class="updated__value" id="updatedAt">—</div>
+          </div>
+        </div>
+
+        <div class="notice__message" role="note">
+          <strong>TASA SUJETA A CAMBIOS SIN PREVIO AVISO</strong>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"></footer>
+  </div>
+
+  <!-- Admin Modal -->
+  <dialog class="modal" id="adminModal">
+    <form method="dialog" class="modal__card" id="adminForm">
+      <div class="modal__header">
+        <div class="modal__title">Editar tasas</div>
+        <button class="btn btn--ghost btn--icon" value="cancel" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="modal__body">
+        <div class="field">
+          <label for="inUsdBcv">USD-BCV</label>
+          <input id="inUsdBcv" inputmode="decimal" placeholder="400" />
+          <small>USD ↔ VES (BCV)</small>
+        </div>
+
+        <div class="field">
+          <label for="inBrlVes">Brasil → Venezuela</label>
+          <input id="inBrlVes" inputmode="decimal" placeholder="70" />
+          <small>BRL → VES</small>
+        </div>
+
+        <div class="field">
+          <label for="inVesBrl">Venezuela → Brasil</label>
+          <input id="inVesBrl" inputmode="decimal" placeholder="100" />
+          <small>VES → BRL</small>
+        </div>
+
+        <div class="field">
+          <label for="inNote">Mensaje</label>
+          <textarea id="inNote" rows="2">TASA SUJETA A CAMBIOS SIN PREVIO AVISO</textarea>
+        </div>
+
+        <div class="field field--inline">
+          <label for="inUpdatedAt">Fecha/Hora (auto)</label>
+          <input id="inUpdatedAt" disabled />
+        </div>
+
+        <div class="warn">
+          <span class="warn__icon">⚠️</span>
+          <span>Esto genera un <strong>rates.json</strong> para reemplazar el del sitio. En Netlify (estático) no se puede guardar en el servidor sin backend.</span>
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn btn--ghost" value="cancel" type="button" id="cancelAdmin">Cancelar</button>
+        <button class="btn" value="default" type="button" id="downloadRates">Descargar rates.json</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
