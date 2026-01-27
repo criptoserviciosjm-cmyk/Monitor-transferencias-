@@ -1,9 +1,9 @@
 {
   "appTitle": "Inversiónes J.B",
-  "updatedAt": "2026-01-27T15:02:20+00:00",
+  "updatedAt": "2026-01-27T15:19:30+00:00",
   "rates": {
     "USD_BCV": 400,
-    "BRL_VES": 70,
-    "VES_BRL": 100
+    "BRL_VES": 700,
+    "VES_BRL": 1000
   }
 }
